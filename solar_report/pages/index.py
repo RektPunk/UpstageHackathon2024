@@ -2,13 +2,13 @@
 
 import reflex as rx
 from ..templates import template
-from ..views.stats_cards import stats_cards
+from ..views.stats_cards import api_stats_cards, participants_stats_cards
 from ..views.charts import (
     users_chart,
     revenue_chart,
     area_toggle,
-    pie_chart,
-    timeframe_select,
+    track_pie_chart,
+    tech_pie_chart,
     StatsState,
 )
 from ..views.adquisition_view import adquisition
@@ -47,8 +47,69 @@ def index() -> rx.Component:
         The UI for the overview page.
     """
     return rx.vstack(
-        rx.heading(f"Welcome, participants", size="5"),
-        stats_cards(),
+        rx.heading(f"Participants Analysis", size="5"),
+        participants_stats_cards(),
+        rx.grid(
+            card(
+                rx.hstack(
+                    rx.hstack(
+                        rx.icon("user-round-search", size=20),
+                        rx.text("Track", size="4", weight="medium"),
+                        align="center",
+                        spacing="2",
+                    ),
+                    align="center",
+                    width="100%",
+                    justify="between",
+                ),
+                track_pie_chart(),
+            ),
+            gap="1rem",
+            grid_template_columns=[
+                "1fr",
+                "repeat(1, 1fr)",
+            ],
+            width="100%",
+        ),
+        rx.grid(
+            card(
+                rx.hstack(
+                    rx.hstack(
+                        rx.icon("user-round-search", size=20),
+                        rx.text("Used Tool", size="4", weight="medium"),
+                        align="center",
+                        spacing="2",
+                    ),
+                    align="center",
+                    width="100%",
+                    justify="between",
+                ),
+                tech_pie_chart(),
+            ),
+            card(
+                rx.hstack(
+                    rx.icon("globe", size=20),
+                    rx.text("Participants by geography", size="4", weight="medium"),
+                    align="center",
+                    spacing="2",
+                    margin_bottom="2.5em",
+                ),
+                rx.vstack(
+                    adquisition(),
+                ),
+            ),
+            gap="1rem",
+            grid_template_columns=[
+                "1fr",
+                "repeat(1, 1fr)",
+                "repeat(2, 1fr)",
+                "repeat(2, 1fr)",
+                "repeat(2, 1fr)",
+            ],
+            width="100%",
+        ),
+        rx.heading(f"API usage", size="5"),
+        api_stats_cards(),
         card(
             rx.hstack(
                 tab_content_header(),
@@ -68,44 +129,7 @@ def index() -> rx.Component:
                 ("unique_keys", revenue_chart()),
             ),
         ),
-        rx.grid(
-            card(
-                rx.hstack(
-                    rx.hstack(
-                        rx.icon("user-round-search", size=20),
-                        rx.text("Visitors Analytics", size="4", weight="medium"),
-                        align="center",
-                        spacing="2",
-                    ),
-                    timeframe_select(),
-                    align="center",
-                    width="100%",
-                    justify="between",
-                ),
-                pie_chart(),
-            ),
-            card(
-                rx.hstack(
-                    rx.icon("globe", size=20),
-                    rx.text("Acquisition Overview", size="4", weight="medium"),
-                    align="center",
-                    spacing="2",
-                    margin_bottom="2.5em",
-                ),
-                rx.vstack(
-                    adquisition(),
-                ),
-            ),
-            gap="1rem",
-            grid_template_columns=[
-                "1fr",
-                "repeat(1, 1fr)",
-                "repeat(2, 1fr)",
-                "repeat(2, 1fr)",
-                "repeat(2, 1fr)",
-            ],
-            width="100%",
-        ),
         spacing="8",
         width="100%",
     )
+    

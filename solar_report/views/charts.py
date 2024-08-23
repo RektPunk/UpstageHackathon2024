@@ -13,8 +13,27 @@ class StatsState(rx.State):
     api_calls = []
     unique_keys = []
 
-    device_data = []
-    yearly_device_data = []
+    track_data = [
+        {"name": "Travel and Tourism", "value": 22, "fill": "var(--blue-6)"},
+        {"name": "Innovation (Etc topic)", "value": 18, "fill": "var(--green-6)"},
+        {"name": "Healthcare & Wellness Tech", "value": 8, "fill": "var(--purple-6)"},
+        {"name": "Finance", "value": 7, "fill": "var(--orange-6)"},
+        {"name": "Legal", "value": 6, "fill": "var(--red-6)"},
+    ]
+
+    tech_data = [
+        {"name": "FastAPI", "value": 13, "fill": "var(--green-8)"},
+        {"name": "JavaScript", "value": 11, "fill": "var(--red-8)"},
+        {"name": "GitHub", "value": 9, "fill": "var(--orange-8)"},
+        {"name": "Flask", "value": 6, "fill": "var(--cyan-8)"},
+        {"name": "Streamlit", "value": 8, "fill": "var(--violet-8)"},
+        {"name": "Predibase", "value": 8, "fill": "var(--teal-8)"},
+        {"name": "HTML", "value": 6, "fill": "var(--yellow-8)"},
+        {"name": "Flutter", "value": 6, "fill": "var(--purple-8)"},
+        {"name": "MongoDB", "value": 5, "fill": "var(--brown-8)"},
+        {"name": "LangChain", "value": 9, "fill": "var(--lime-8)"},
+        {"name": "Firebase", "value": 4, "fill": "var(--blue-8)"},
+    ]
 
     def toggle_areachart(self):
         self.area_toggle = not self.area_toggle
@@ -43,19 +62,7 @@ class StatsState(rx.State):
                 }
             )
 
-        self.device_data = [
-            {"name": "Desktop", "value": 23, "fill": "var(--blue-8)"},
-            {"name": "Mobile", "value": 47, "fill": "var(--green-8)"},
-            {"name": "Tablet", "value": 25, "fill": "var(--purple-8)"},
-            {"name": "Other", "value": 5, "fill": "var(--red-8)"},
-        ]
 
-        self.yearly_device_data = [
-            {"name": "Desktop", "value": 34, "fill": "var(--blue-8)"},
-            {"name": "Mobile", "value": 46, "fill": "var(--green-8)"},
-            {"name": "Tablet", "value": 21, "fill": "var(--purple-8)"},
-            {"name": "Other", "value": 9, "fill": "var(--red-8)"},
-        ]
 
 
 def area_toggle() -> rx.Component:
@@ -193,49 +200,36 @@ def revenue_chart() -> rx.Component:
     )
 
 
-
-
-def pie_chart() -> rx.Component:
-    return rx.cond(
-        StatsState.timeframe == "Yearly",
-        rx.recharts.pie_chart(
-            rx.recharts.pie(
-                data=StatsState.yearly_device_data,
-                data_key="value",
-                name_key="name",
-                cx="50%",
-                cy="50%",
-                padding_angle=1,
-                inner_radius="70",
-                outer_radius="100",
-                label=True,
-            ),
-            rx.recharts.legend(),
-            height=300,
+def tech_pie_chart() -> rx.Component:
+    return rx.recharts.pie_chart(
+        rx.recharts.pie(
+            data=StatsState.tech_data,
+            data_key="value",
+            name_key="name",
+            cx="50%",
+            cy="50%",
+            padding_angle=1,
+            inner_radius="70",
+            outer_radius="100",
+            label=True,
         ),
-        rx.recharts.pie_chart(
-            rx.recharts.pie(
-                data=StatsState.device_data,
-                data_key="value",
-                name_key="name",
-                cx="50%",
-                cy="50%",
-                padding_angle=1,
-                inner_radius="70",
-                outer_radius="100",
-                label=True,
-            ),
-            rx.recharts.legend(),
-            height=300,
-        ),
+        rx.recharts.legend(),
+        height=300,
     )
 
-
-def timeframe_select() -> rx.Component:
-    return rx.select(
-        ["Monthly", "Yearly"],
-        default_value="Monthly",
-        value=StatsState.timeframe,
-        variant="surface",
-        on_change=StatsState.set_timeframe,
+def track_pie_chart() -> rx.Component:
+    return rx.recharts.pie_chart(
+        rx.recharts.pie(
+            data=StatsState.track_data,
+            data_key="value",
+            name_key="name",
+            cx="50%",
+            cy="50%",
+            padding_angle=1,
+            inner_radius="70",
+            outer_radius="100",
+            label=True,
+        ),
+        rx.recharts.legend(),
+        height=300,
     )

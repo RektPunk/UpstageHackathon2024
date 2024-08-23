@@ -13,10 +13,11 @@ def sidebar_header() -> rx.Component:
     """
     return rx.hstack(
         # The logo.
-        rx.color_mode_cond(
-            rx.image(src="/reflex_black.svg", height="1.5em"),
-            rx.image(src="/reflex_white.svg", height="1.5em"),
-        ),
+        # rx.color_mode_cond(
+        #     rx.image(src="/reflex_black.svg", height="1.5em"),
+        #     rx.image(src="/reflex_white.svg", height="1.5em"),
+        # ),
+        rx.heading("Global AI Hackathon"),
         rx.spacer(),
         align="center",
         width="100%",
