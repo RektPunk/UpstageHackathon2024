@@ -63,7 +63,7 @@ def api_stats_card(
                     align="center",
                 ),
                 rx.text(
-                    f"{change} from last month",
+                    f"{change} during Hackathon",
                     size="2",
                     color=rx.color("gray", 10),
                 ),
@@ -154,9 +154,9 @@ def participants_stats_cards() -> rx.Component:
             icon_color="blue",
         ),
         participants_stats_card(
-            stat_name="# of teams",
-            value=70,
-            icon="warehouse",
+            stat_name="# of countries",
+            value=43,
+            icon="earth",
             icon_color="green",
         ),
         participants_stats_card(

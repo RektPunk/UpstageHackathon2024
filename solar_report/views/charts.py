@@ -39,7 +39,7 @@ class StatsState(rx.State):
         self.area_toggle = not self.area_toggle
 
     def randomize_data(self):
-        # If data is already populated, don't randomize
+        # FIXME: fix it
         if self.api_calls != []:
             return
 
@@ -120,7 +120,7 @@ def _custom_tooltip(color: LiteralAccentColor) -> rx.Component:
     )
 
 
-def users_chart() -> rx.Component:
+def api_call_chart() -> rx.Component:
     return rx.cond(
         StatsState.area_toggle,
         rx.recharts.area_chart(
@@ -160,7 +160,7 @@ def users_chart() -> rx.Component:
     )
 
 
-def revenue_chart() -> rx.Component:
+def unique_key_chart() -> rx.Component:
     return rx.cond(
         StatsState.area_toggle,
         rx.recharts.area_chart(
@@ -209,8 +209,8 @@ def tech_pie_chart() -> rx.Component:
             cx="50%",
             cy="50%",
             padding_angle=1,
-            inner_radius="70",
-            outer_radius="100",
+            inner_radius="60",
+            outer_radius="80",
             label=True,
         ),
         rx.recharts.legend(),

@@ -4,14 +4,14 @@ import reflex as rx
 from ..templates import template
 from ..views.stats_cards import api_stats_cards, participants_stats_cards
 from ..views.charts import (
-    users_chart,
-    revenue_chart,
+    unique_key_chart,
+    api_call_chart,
     area_toggle,
     track_pie_chart,
     tech_pie_chart,
     StatsState,
 )
-from ..views.adquisition_view import adquisition
+from ..views.geography_view import geography
 from ..components.card import card
 import datetime
 
@@ -47,8 +47,11 @@ def index() -> rx.Component:
         The UI for the overview page.
     """
     return rx.vstack(
-        rx.heading(f"Participants Analysis", size="5"),
+        rx.heading(f"Welcome", size="7"),
+        rx.text("greetings & introduction on hackathon blah blah"),
+        rx.heading(f"Participants statistics", size="4"),
         participants_stats_cards(),
+        rx.text("there are blah blah"),
         rx.grid(
             card(
                 rx.hstack(
@@ -95,7 +98,7 @@ def index() -> rx.Component:
                     margin_bottom="2.5em",
                 ),
                 rx.vstack(
-                    adquisition(),
+                    geography(),
                 ),
             ),
             gap="1rem",
@@ -125,8 +128,8 @@ def index() -> rx.Component:
             ),
             rx.match(
                 StatsState.selected_tab,
-                ("api_call", users_chart()),
-                ("unique_keys", revenue_chart()),
+                ("api_call", api_call_chart()),
+                ("unique_keys", unique_key_chart()),
             ),
         ),
         spacing="8",

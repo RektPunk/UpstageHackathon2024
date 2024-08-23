@@ -79,7 +79,7 @@ def navbar_footer() -> rx.Component:
     return rx.hstack(
         rx.link(
             rx.text("Link", size="3"),
-            href="",
+            href="https://www.upstage.ai/global-ai-week-ai-hackathon",
             color_scheme="gray",
             underline="none",
         ),
@@ -173,16 +173,16 @@ def navbar() -> rx.Component:
     return rx.el.nav(
         rx.hstack(
             # The logo.
-            # rx.color_mode_cond(
-            #     rx.image(src="/reflex_black.svg", height="1em"),
-            #     rx.image(src="/reflex_white.svg", height="1em"),
-            # ),
-            rx.heading("Global AI Hackathon"),
+            rx.color_mode_cond(
+                rx.image(src="/upstage_black.png", height="3em"),
+                rx.image(src="/upstage_white.png", height="3em"),
+            ),
+            # rx.heading("Global AI Hackathon"),
             rx.spacer(),
             menu_button(),
             align="center",
             width="100%",
-            padding_y="1.25em",
+            padding_y="1em",
             padding_x=["1em", "1em", "2em"],
         ),
         display=["block", "block", "block", "block", "block", "none"],
