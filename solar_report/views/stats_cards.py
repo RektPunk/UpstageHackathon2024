@@ -80,34 +80,24 @@ def stats_card(
 def stats_cards() -> rx.Component:
     return rx.grid(
         stats_card(
-            stat_name="Users",
+            stat_name="API Calls",
             value=4200,
             prev_value=3000,
-            icon="users",
+            icon="send",
             icon_color="blue",
         ),
         stats_card(
-            stat_name="Revenue",
+            stat_name="Unique key",
             value=12000,
             prev_value=15000,
-            icon="dollar-sign",
+            icon="file_key",
             icon_color="green",
-            extra_char="$",
-        ),
-        stats_card(
-            stat_name="Orders",
-            value=300,
-            prev_value=250,
-            icon="shopping-cart",
-            icon_color="purple",
         ),
         gap="1rem",
         grid_template_columns=[
             "1fr",
             "repeat(1, 1fr)",
             "repeat(2, 1fr)",
-            "repeat(3, 1fr)",
-            "repeat(3, 1fr)",
         ],
         width="100%",
     )

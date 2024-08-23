@@ -8,11 +8,11 @@ from reflex.components.radix.themes.base import (
 
 class StatsState(rx.State):
     area_toggle: bool = True
-    selected_tab: str = "users"
+    selected_tab: str = "api_call"
     timeframe: str = "Monthly"
-    users_data = []
-    revenue_data = []
-    orders_data = []
+    api_calls = []
+    unique_keys = []
+
     device_data = []
     yearly_device_data = []
 
@@ -21,35 +21,25 @@ class StatsState(rx.State):
 
     def randomize_data(self):
         # If data is already populated, don't randomize
-        if self.users_data:
+        if self.api_calls != []:
             return
 
         for i in range(30, -1, -1):  # Include today's data
-            self.revenue_data.append(
+            self.api_calls.append(
                 {
                     "Date": (
                         datetime.datetime.now() - datetime.timedelta(days=i)
                     ).strftime("%m-%d"),
-                    "Revenue": random.randint(1000, 5000),
+                    "API Calls": random.randint(1000, 5000),
                 }
             )
         for i in range(30, -1, -1):
-            self.orders_data.append(
+            self.unique_keys.append(
                 {
                     "Date": (
                         datetime.datetime.now() - datetime.timedelta(days=i)
                     ).strftime("%m-%d"),
-                    "Orders": random.randint(100, 500),
-                }
-            )
-
-        for i in range(30, -1, -1):
-            self.users_data.append(
-                {
-                    "Date": (
-                        datetime.datetime.now() - datetime.timedelta(days=i)
-                    ).strftime("%m-%d"),
-                    "Users": random.randint(100, 500),
+                    "Unique Keys": random.randint(100, 500),
                 }
             )
 
@@ -133,7 +123,7 @@ def users_chart() -> rx.Component:
                 stroke_dasharray="3 3",
             ),
             rx.recharts.area(
-                data_key="Users",
+                data_key="API Calls",
                 stroke=rx.color("blue", 9),
                 fill="url(#colorBlue)",
                 type_="monotone",
@@ -141,7 +131,7 @@ def users_chart() -> rx.Component:
             rx.recharts.x_axis(data_key="Date", scale="auto"),
             rx.recharts.y_axis(),
             rx.recharts.legend(),
-            data=StatsState.users_data,
+            data=StatsState.api_calls,
             height=425,
         ),
         rx.recharts.bar_chart(
@@ -150,14 +140,14 @@ def users_chart() -> rx.Component:
             ),
             _custom_tooltip("blue"),
             rx.recharts.bar(
-                data_key="Users",
+                data_key="API Calls",
                 stroke=rx.color("blue", 9),
                 fill=rx.color("blue", 7),
             ),
             rx.recharts.x_axis(data_key="Date", scale="auto"),
             rx.recharts.y_axis(),
             rx.recharts.legend(),
-            data=StatsState.users_data,
+            data=StatsState.api_calls,
             height=425,
         ),
     )
@@ -173,7 +163,7 @@ def revenue_chart() -> rx.Component:
                 stroke_dasharray="3 3",
             ),
             rx.recharts.area(
-                data_key="Revenue",
+                data_key="Unique Keys",
                 stroke=rx.color("green", 9),
                 fill="url(#colorGreen)",
                 type_="monotone",
@@ -181,7 +171,7 @@ def revenue_chart() -> rx.Component:
             rx.recharts.x_axis(data_key="Date", scale="auto"),
             rx.recharts.y_axis(),
             rx.recharts.legend(),
-            data=StatsState.revenue_data,
+            data=StatsState.unique_keys,
             height=425,
         ),
         rx.recharts.bar_chart(
@@ -190,57 +180,19 @@ def revenue_chart() -> rx.Component:
                 stroke_dasharray="3 3",
             ),
             rx.recharts.bar(
-                data_key="Revenue",
+                data_key="Unique Keys",
                 stroke=rx.color("green", 9),
                 fill=rx.color("green", 7),
             ),
             rx.recharts.x_axis(data_key="Date", scale="auto"),
             rx.recharts.y_axis(),
             rx.recharts.legend(),
-            data=StatsState.revenue_data,
+            data=StatsState.unique_keys,
             height=425,
         ),
     )
 
 
-def orders_chart() -> rx.Component:
-    return rx.cond(
-        StatsState.area_toggle,
-        rx.recharts.area_chart(
-            _create_gradient("purple", "colorPurple"),
-            _custom_tooltip("purple"),
-            rx.recharts.cartesian_grid(
-                stroke_dasharray="3 3",
-            ),
-            rx.recharts.area(
-                data_key="Orders",
-                stroke=rx.color("purple", 9),
-                fill="url(#colorPurple)",
-                type_="monotone",
-            ),
-            rx.recharts.x_axis(data_key="Date", scale="auto"),
-            rx.recharts.y_axis(),
-            rx.recharts.legend(),
-            data=StatsState.orders_data,
-            height=425,
-        ),
-        rx.recharts.bar_chart(
-            _custom_tooltip("purple"),
-            rx.recharts.cartesian_grid(
-                stroke_dasharray="3 3",
-            ),
-            rx.recharts.bar(
-                data_key="Orders",
-                stroke=rx.color("purple", 9),
-                fill=rx.color("purple", 7),
-            ),
-            rx.recharts.x_axis(data_key="Date", scale="auto"),
-            rx.recharts.y_axis(),
-            rx.recharts.legend(),
-            data=StatsState.orders_data,
-            height=425,
-        ),
-    )
 
 
 def pie_chart() -> rx.Component:
