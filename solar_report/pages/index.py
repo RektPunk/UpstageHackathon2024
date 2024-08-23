@@ -16,7 +16,6 @@ from ..views.charts import (
 from ..views.adquisition_view import adquisition
 from ..components.notification import notification
 from ..components.card import card
-from .profile import ProfileState
 import datetime
 
 
@@ -51,7 +50,7 @@ def index() -> rx.Component:
         The UI for the overview page.
     """
     return rx.vstack(
-        rx.heading(f"Welcome, {ProfileState.profile.name}", size="5"),
+        rx.heading(f"Welcome, participants", size="5"),
         rx.flex(
             rx.input(
                 rx.input.slot(rx.icon("search"), padding_left="0"),

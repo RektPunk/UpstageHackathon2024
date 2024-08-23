@@ -33,23 +33,23 @@ def sidebar_footer() -> rx.Component:
     """
     return rx.hstack(
         rx.link(
-            rx.text("Docs", size="3"),
+            rx.text("Link", size="3"),
             href="",
             color_scheme="gray",
             underline="none",
         ),
         rx.link(
             rx.text("Discord", size="3"),
-            href="https://discord.gg/9jfjm5Wx",
+            href="https://discord.gg/hxnJ86FnVE",
             color_scheme="gray",
             underline="none",
         ),
-        # rx.spacer(),
-        # rx.color_mode.button(style={"opacity": "0.8", "scale": "0.95"}),
-        # justify="start",
-        # align="center",
-        # width="100%",
-        # padding="0.35em",
+        rx.spacer(),
+        rx.color_mode.button(style={"opacity": "0.8", "scale": "0.95"}),
+        justify="start",
+        align="center",
+        width="100%",
+        padding="0.35em",
     )
 
 
@@ -79,7 +79,6 @@ def sidebar_item(text: str, url: str) -> rx.Component:
                 ("Overview", sidebar_item_icon("home")),
                 ("Table", sidebar_item_icon("table-2")),
                 ("About", sidebar_item_icon("book-open")),
-                ("Profile", sidebar_item_icon("user")),
                 ("Settings", sidebar_item_icon("settings")),
                 sidebar_item_icon("layout-dashboard"),
             ),
@@ -136,7 +135,6 @@ def sidebar() -> rx.Component:
         "/table",
         "/about",
         "/account",
-        "/profile",
         "/settings",
     ]
 

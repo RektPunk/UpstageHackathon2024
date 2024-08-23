@@ -31,7 +31,6 @@ def menu_item(text: str, url: str) -> rx.Component:
                 ("Overview", menu_item_icon("home")),
                 ("Table", menu_item_icon("table-2")),
                 ("About", menu_item_icon("book-open")),
-                ("Profile", menu_item_icon("user")),
                 ("Settings", menu_item_icon("settings")),
                 menu_item_icon("layout-dashboard"),
             ),
@@ -81,14 +80,14 @@ def navbar_footer() -> rx.Component:
     """
     return rx.hstack(
         rx.link(
-            rx.text("Docs", size="3"),
-            href="https://reflex.dev/docs/getting-started/introduction/",
+            rx.text("Link", size="3"),
+            href="",
             color_scheme="gray",
             underline="none",
         ),
         rx.link(
-            rx.text("Blog", size="3"),
-            href="https://reflex.dev/blog/",
+            rx.text("Discord", size="3"),
+            href="https://discord.gg/hxnJ86FnVE",
             color_scheme="gray",
             underline="none",
         ),
@@ -110,7 +109,6 @@ def menu_button() -> rx.Component:
         "/",
         "/table",
         "/about",
-        "/profile",
         "/settings",
     ]
 
