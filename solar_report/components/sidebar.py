@@ -79,7 +79,6 @@ def sidebar_item(text: str, url: str) -> rx.Component:
                 ("Overview", sidebar_item_icon("home")),
                 ("Table", sidebar_item_icon("table-2")),
                 ("About", sidebar_item_icon("book-open")),
-                ("Settings", sidebar_item_icon("settings")),
                 sidebar_item_icon("layout-dashboard"),
             ),
             rx.text(text, size="3", weight="regular"),
@@ -135,7 +134,6 @@ def sidebar() -> rx.Component:
         "/table",
         "/about",
         "/account",
-        "/settings",
     ]
 
     # Get the decorated pages.
