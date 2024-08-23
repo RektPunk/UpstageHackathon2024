@@ -1,9 +1,9 @@
 """The about page."""
 
-from .. import styles
-from ..templates import template
-
 import reflex as rx
+
+from solar_report import styles
+from solar_report.templates import template
 
 
 @template(route="/about", title="About")

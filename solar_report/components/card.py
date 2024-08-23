@@ -1,4 +1,5 @@
 import reflex as rx
+
 from solar_report import styles
 
 

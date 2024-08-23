@@ -1,19 +1,27 @@
 """The overview page of the app."""
 
+import datetime
+
 import reflex as rx
-from ..templates import template
-from ..views.stats_cards import api_stats_cards, participants_stats_cards
-from ..views.charts import (
-    unique_key_chart,
+
+from solar_report.components.card import card
+from solar_report.templates import template
+from solar_report.views.charts import (
+    StatsState,
     api_call_chart,
     area_toggle,
-    track_pie_chart,
+    pie_chart,
+    pie_type_select,
     tech_pie_chart,
-    StatsState,
+    track_pie_chart,
+    unique_key_chart,
 )
-from ..views.geography_view import geography
-from ..components.card import card
-import datetime
+from solar_report.views.geography_view import geography
+from solar_report.views.stats_cards import (
+    api_stats_cards,
+    participants_stats_cards,
+    submission_stats_cards,
+)
 
 
 def _time_data() -> rx.Component:
@@ -47,48 +55,12 @@ def index() -> rx.Component:
         The UI for the overview page.
     """
     return rx.vstack(
-        rx.heading(f"Welcome", size="7"),
+        rx.heading(f"Welcome", size="9"),
         rx.text("greetings & introduction on hackathon blah blah"),
-        rx.heading(f"Participants statistics", size="4"),
+        rx.heading(f"Participants", size="8"),
+        rx.text("blah blah"),
         participants_stats_cards(),
-        rx.text("there are blah blah"),
         rx.grid(
-            card(
-                rx.hstack(
-                    rx.hstack(
-                        rx.icon("user-round-search", size=20),
-                        rx.text("Track", size="4", weight="medium"),
-                        align="center",
-                        spacing="2",
-                    ),
-                    align="center",
-                    width="100%",
-                    justify="between",
-                ),
-                track_pie_chart(),
-            ),
-            gap="1rem",
-            grid_template_columns=[
-                "1fr",
-                "repeat(1, 1fr)",
-            ],
-            width="100%",
-        ),
-        rx.grid(
-            card(
-                rx.hstack(
-                    rx.hstack(
-                        rx.icon("user-round-search", size=20),
-                        rx.text("Used Tool", size="4", weight="medium"),
-                        align="center",
-                        spacing="2",
-                    ),
-                    align="center",
-                    width="100%",
-                    justify="between",
-                ),
-                tech_pie_chart(),
-            ),
             card(
                 rx.hstack(
                     rx.icon("globe", size=20),
@@ -105,14 +77,78 @@ def index() -> rx.Component:
             grid_template_columns=[
                 "1fr",
                 "repeat(1, 1fr)",
-                "repeat(2, 1fr)",
-                "repeat(2, 1fr)",
+            ],
+            width="100%",
+        ),
+        rx.heading("Submission", size="8"),
+        rx.text("there are blah blah"),
+        submission_stats_cards(),
+        rx.grid(
+            card(
+                rx.hstack(
+                    rx.hstack(
+                        rx.icon("train-track", size=20),
+                        rx.text("Track", size="4", weight="medium"),
+                        align="center",
+                        spacing="2",
+                    ),
+                    align="center",
+                    width="50%",
+                    justify="between",
+                ),
+                track_pie_chart(),
+            ),
+            card(
+                rx.hstack(
+                    rx.hstack(
+                        rx.icon("wrench", size=20),
+                        rx.text("Used Tool", size="4", weight="medium"),
+                        align="center",
+                        spacing="2",
+                    ),
+                    align="center",
+                    width="50%",
+                    justify="between",
+                ),
+                tech_pie_chart(),
+            ),
+            gap="1rem",
+            grid_template_columns=[
+                "1fr",
+                "repeat(1, 1fr)",
                 "repeat(2, 1fr)",
             ],
             width="100%",
         ),
-        rx.heading(f"API usage", size="5"),
+        rx.heading(f"API usage", size="8"),
+        rx.text("There are blah blah"),
         api_stats_cards(),
+        rx.grid(
+            card(
+                rx.hstack(
+                    rx.hstack(
+                        rx.icon("user-round-search", size=20),
+                        rx.text(
+                            "API used with respect to Track", size="4", weight="medium"
+                        ),
+                        align="center",
+                        spacing="2",
+                    ),
+                    pie_type_select(),
+                    align="center",
+                    width="100%",
+                    justify="between",
+                ),
+                pie_chart(),
+                gap="1rem",
+                grid_template_columns=[
+                    "1fr",
+                    "repeat(1, 1fr)",
+                    "repeat(2, 1fr)",
+                ],
+            ),
+            width="100%",
+        ),
         card(
             rx.hstack(
                 tab_content_header(),
@@ -135,4 +171,3 @@ def index() -> rx.Component:
         spacing="8",
         width="100%",
     )
-    

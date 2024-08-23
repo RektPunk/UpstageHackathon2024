@@ -1,13 +1,12 @@
-"""Common templates used between pages in the app."""
-
 from __future__ import annotations
 
-from .. import styles
-from ..components.sidebar import sidebar
-from ..components.navbar import navbar
 from typing import Callable
 
 import reflex as rx
+
+from solar_report import styles
+from solar_report.components.navbar import navbar
+from solar_report.components.sidebar import sidebar
 
 # Meta tags for the app.
 default_meta = [

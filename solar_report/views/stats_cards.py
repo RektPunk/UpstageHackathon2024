@@ -1,7 +1,7 @@
 import reflex as rx
-from .. import styles
-
 from reflex.components.radix.themes.base import LiteralAccentColor
+
+from solar_report import styles
 
 
 def api_stats_card(
@@ -159,6 +159,24 @@ def participants_stats_cards() -> rx.Component:
             icon="earth",
             icon_color="green",
         ),
+        gap="1rem",
+        grid_template_columns=[
+            "1fr",
+            "repeat(1, 1fr)",
+            "repeat(2, 1fr)",
+        ],
+        width="100%",
+    )
+
+
+def submission_stats_cards() -> rx.Component:
+    return rx.grid(
+        participants_stats_card(
+            stat_name="# of teams",
+            value=70,
+            icon="building",
+            icon_color="blue",
+        ),
         participants_stats_card(
             stat_name="# of submission",
             value=61,
@@ -170,8 +188,6 @@ def participants_stats_cards() -> rx.Component:
             "1fr",
             "repeat(1, 1fr)",
             "repeat(2, 1fr)",
-            "repeat(3, 1fr)",
-            "repeat(3, 1fr)",
         ],
         width="100%",
     )

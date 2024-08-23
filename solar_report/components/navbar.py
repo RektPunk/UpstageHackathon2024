@@ -1,8 +1,6 @@
-"""Navbar component for the app."""
+import reflex as rx
 
 from solar_report import styles
-
-import reflex as rx
 
 
 def menu_item_icon(icon: str) -> rx.Component:

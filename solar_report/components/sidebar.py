@@ -1,8 +1,6 @@
-"""Sidebar component for the app."""
-
-from .. import styles
-
 import reflex as rx
+
+from solar_report import styles
 
 
 def sidebar_header() -> rx.Component:
