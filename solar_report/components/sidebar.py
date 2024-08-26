@@ -76,7 +76,7 @@ def sidebar_item(text: str, url: str) -> rx.Component:
             rx.match(
                 text,
                 ("Overview", sidebar_item_icon("home")),
-                ("Code insight", sidebar_item_icon("book-open")),
+                ("Code insight", sidebar_item_icon("search_code")),
                 ("About", sidebar_item_icon("book-open")),
                 sidebar_item_icon("layout-dashboard"),
             ),

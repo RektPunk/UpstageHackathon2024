@@ -1,4 +1,4 @@
-"""The about page."""
+"""The code insight page."""
 
 import reflex as rx
 

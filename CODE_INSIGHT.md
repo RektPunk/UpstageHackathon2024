@@ -1,4 +1,4 @@
-## Code Insights: From Upstage Global AI Week Online Hackathon Winners
+# Code Insights: From Upstage Global AI Week Online Hackathon Winners
 
 Hello Upstage Global AI Week Participants! 🙌  
 We were overwhelmed by the passion and effort you showed during the first round of qualifiers for the Upstage Global AI Week. There were so many great ideas, and we can still see you all working day and night to overcome the technical challenges that arose. 👨‍💻👩‍💻

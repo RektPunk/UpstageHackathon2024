@@ -27,7 +27,7 @@ def menu_item(text: str, url: str) -> rx.Component:
             rx.match(
                 text,
                 ("Overview", menu_item_icon("home")),
-                ("Code insight", menu_item_icon("book-open")),
+                ("Code insight", menu_item_icon("search_code")),
                 ("About", menu_item_icon("book-open")),
                 menu_item_icon("layout-dashboard"),
             ),
