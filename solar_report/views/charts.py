@@ -1,16 +1,15 @@
-import datetime
-import random
-
 import reflex as rx
 from reflex.components.radix.themes.base import LiteralAccentColor
 
 from solar_report.views.data import (
+    API_CALLS,
     FINANCE_DATA,
     HEALTHCARE_DATA,
     INNOVATION_DATA,
     LEGAL_DATA,
     OVERALL_DATA,
     TECH_DATA,
+    TOKEN_USAGE,
     TRACK_DATA,
     TRAVEL_DATA,
 )
@@ -21,8 +20,8 @@ class StatsState(rx.State):
     selected_tab: str = "api_call"
 
     pie_type: str = "Overall"
-    api_calls = []
-    unique_keys = []
+    api_calls = API_CALLS
+    token_usage = TOKEN_USAGE
 
     tech_data = TECH_DATA
     track_data = TRACK_DATA
@@ -36,30 +35,6 @@ class StatsState(rx.State):
 
     def toggle_areachart(self):
         self.area_toggle = not self.area_toggle
-
-    def randomize_data(self):
-        # FIXME: fix it
-        if self.api_calls != []:
-            return
-
-        for i in range(30, -1, -1):  # Include today's data
-            self.api_calls.append(
-                {
-                    "Date": (
-                        datetime.datetime.now() - datetime.timedelta(days=i)
-                    ).strftime("%m-%d"),
-                    "API Calls": random.randint(1000, 5000),
-                }
-            )
-        for i in range(30, -1, -1):
-            self.unique_keys.append(
-                {
-                    "Date": (
-                        datetime.datetime.now() - datetime.timedelta(days=i)
-                    ).strftime("%m-%d"),
-                    "Unique Keys": random.randint(100, 500),
-                }
-            )
 
 
 def area_toggle() -> rx.Component:
@@ -135,7 +110,7 @@ def api_call_chart() -> rx.Component:
                 type_="monotone",
             ),
             rx.recharts.x_axis(data_key="Date", scale="auto"),
-            rx.recharts.y_axis(),
+            rx.recharts.y_axis(scale="auto"),
             rx.recharts.legend(),
             data=StatsState.api_calls,
             height=425,
@@ -151,7 +126,7 @@ def api_call_chart() -> rx.Component:
                 fill=rx.color("blue", 7),
             ),
             rx.recharts.x_axis(data_key="Date", scale="auto"),
-            rx.recharts.y_axis(),
+            rx.recharts.y_axis(scale="auto"),
             rx.recharts.legend(),
             data=StatsState.api_calls,
             height=425,
@@ -159,7 +134,7 @@ def api_call_chart() -> rx.Component:
     )
 
 
-def unique_key_chart() -> rx.Component:
+def token_usage_chart() -> rx.Component:
     return rx.cond(
         StatsState.area_toggle,
         rx.recharts.area_chart(
@@ -169,15 +144,14 @@ def unique_key_chart() -> rx.Component:
                 stroke_dasharray="3 3",
             ),
             rx.recharts.area(
-                data_key="Unique Keys",
+                data_key="Token Usage",
                 stroke=rx.color("green", 9),
                 fill="url(#colorGreen)",
                 type_="monotone",
             ),
             rx.recharts.x_axis(data_key="Date", scale="auto"),
-            rx.recharts.y_axis(),
             rx.recharts.legend(),
-            data=StatsState.unique_keys,
+            data=StatsState.token_usage,
             height=425,
         ),
         rx.recharts.bar_chart(
@@ -186,14 +160,13 @@ def unique_key_chart() -> rx.Component:
                 stroke_dasharray="3 3",
             ),
             rx.recharts.bar(
-                data_key="Unique Keys",
+                data_key="Token Usage",
                 stroke=rx.color("green", 9),
                 fill=rx.color("green", 7),
             ),
             rx.recharts.x_axis(data_key="Date", scale="auto"),
-            rx.recharts.y_axis(),
             rx.recharts.legend(),
-            data=StatsState.unique_keys,
+            data=StatsState.token_usage,
             height=425,
         ),
     )

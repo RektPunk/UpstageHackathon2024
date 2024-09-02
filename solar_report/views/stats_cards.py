@@ -123,15 +123,15 @@ def api_stats_cards() -> rx.Component:
     return rx.grid(
         api_stats_card(
             stat_name="API Calls",
-            value=4200,
-            prev_value=3000,
+            value=243186,
+            prev_value=120625,
             icon="send",
             icon_color="blue",
         ),
         api_stats_card(
-            stat_name="Unique key",
-            value=12000,
-            prev_value=15000,
+            stat_name="Token Usage",
+            value=154932430,
+            prev_value=40928588,
             icon="file_key",
             icon_color="green",
         ),
