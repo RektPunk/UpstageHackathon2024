@@ -40,7 +40,7 @@ def item(
                     size="1",
                 ),
                 rx.progress(
-                    value=progress,
+                    value=int(progress),
                     height="19px",
                     color_scheme=color,
                     width="100%",
@@ -58,15 +58,15 @@ def item(
 
 def geography() -> rx.Component:
     return rx.vstack(
-        item("Korea", "KR", 36, "red"),
-        item("Thailand", "TH", 13, "amber"),
-        item("India", "IN", 12, "blue"),
-        item("USA", "US", 4, "green"),
-        item("Vietnam", "VN", 4, "crimson"),
-        item("Malaysia", "MY", 4, "plum"),
-        item("Singapore", "SG", 3, "red"),
-        item("Indonesia", "ID", 3, "amber"),
-        item("Canada", "CA", 2, "blue"),
+        item("Korea", "KR", 36.3, "red"),
+        item("Thailand", "TH", 13.2, "amber"),
+        item("India", "IN", 12.8, "blue"),
+        item("USA", "US", 4.3, "green"),
+        item("Vietnam", "VN", 4.1, "crimson"),
+        item("Malaysia", "MY", 4.1, "plum"),
+        item("Singapore", "SG", 3.7, "red"),
+        item("Indonesia", "ID", 3.2, "amber"),
+        item("Canada", "CA", 2.2, "blue"),
         width="100%",
         spacing="6",
     )

@@ -62,6 +62,10 @@ def index() -> rx.Component:
                 rx.hstack(
                     rx.icon("globe", size=20),
                     rx.text("Participants by geography", size="4", weight="medium"),
+                    rx.tooltip(
+                        rx.icon("info", size=20),
+                        content="The countries with less than 2% are omitted.",
+                    ),
                     align="center",
                     spacing="2",
                     margin_bottom="2.5em",
