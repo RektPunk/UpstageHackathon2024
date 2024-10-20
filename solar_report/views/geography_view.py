@@ -58,15 +58,14 @@ def item(
 
 def geography() -> rx.Component:
     return rx.vstack(
-        item("Korea", "KR", 36.3, "red"),
-        item("Thailand", "TH", 13.2, "amber"),
-        item("India", "IN", 12.8, "blue"),
-        item("USA", "US", 4.3, "green"),
-        item("Vietnam", "VN", 4.1, "crimson"),
-        item("Malaysia", "MY", 4.1, "plum"),
+        item("Korea", "KR", 31.4, "red"),
+        item("India", "IN", 19.8, "blue"),
+        item("Thailand", "TH", 11.4, "amber"),
+        item("USA", "US", 5.6, "green"),
         item("Singapore", "SG", 3.7, "red"),
-        item("Indonesia", "ID", 3.2, "amber"),
-        item("Canada", "CA", 2.2, "blue"),
+        item("Vietnam", "VN", 3.5, "crimson"),
+        item("Malaysia", "MY", 3.5, "plum"),
+        item("Indonesia", "ID", 2.7, "amber"),
         width="100%",
         spacing="6",
     )
