@@ -149,13 +149,13 @@ def participants_stats_cards() -> rx.Component:
     return rx.grid(
         participants_stats_card(
             stat_name="# of participants",
-            value=612,
+            value=537,
             icon="users",
             icon_color="blue",
         ),
         participants_stats_card(
             stat_name="# of countries",
-            value=43,
+            value=48,
             icon="earth",
             icon_color="green",
         ),
